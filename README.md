@@ -122,6 +122,10 @@ This project demonstrates:
 * Using **FDD (Feature-Driven Development)** for modularity.
 * Writing **unit tests & UI tests** in Compose.
 
+## 💡 Note from Developer
+
+To be honest, I mostly use AI to help with development. I finished Java & Kotlin classes on Dicoding in 2019 and last worked on Kotlin native in 2021. Now, with AI, I can easily build native apps with FDD, including tests and androidTests. AI also makes code review simple and stress-free.
+
 ---
 
 ## 📄 License
