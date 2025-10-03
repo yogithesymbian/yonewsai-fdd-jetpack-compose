@@ -88,13 +88,14 @@ dependencies {
 
 
     // Image loader
-    // implementation("io.coil-kt:coil-compose:3.4.0")
-//    implementation("io.coil-kt:coil-compose")
     implementation("io.coil-kt:coil-compose:2.7.0")
-
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // UI - Icon
+    implementation("androidx.compose.material:material-icons-extended")
+
 
     // Testing
     testImplementation(libs.junit)
