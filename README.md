@@ -47,7 +47,7 @@ com.yogiveloper.yonewsai
 ## 📸 Screenshots
 | News List | News Detail |
 |-----------|-------------|
-| ![List Screenshot](screenshots/news_list.png) | ![Detail Screenshot](screenshots/news_detail.png) |
+| ![List Screenshot](screenshots/news_list.jpeg) | ![Detail Screenshot](screenshots/news_detail.jpeg) |
 
 ---
 
