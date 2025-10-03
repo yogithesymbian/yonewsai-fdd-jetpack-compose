@@ -17,7 +17,7 @@ The app consumes data from [NewsAPI.org](https://newsapi.org) and demonstrates m
 - **Coil** for image loading.  
 - Error & loading state handling.
   
-NB: build gradle still not clean need to use lib.version.toml.
+NB: build gradle still not clean need to use lib.version.toml ( Lint Code Analysis )
 
 ---
 
