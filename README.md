@@ -45,9 +45,14 @@ com.yogiveloper.yonewsai
 ---
 
 ## 📸 Screenshots
-| News List | News Detail |
-|-----------|-------------|
-| ![List Screenshot](screenshots/news_list.jpeg) | ![Detail Screenshot](screenshots/news_detail.jpeg) |
+| News List | News Detail (1) | News Detail (2) |
+|-----------|-------------|-------------|
+| ![List Screenshot](screenshots/news_list.jpeg) | ![Detail Screenshot](screenshots/news_detail_1.jpeg) | ![Detail Screenshot](screenshots/news_detail_2.jpeg) |
+
+### 🖼️ Jetpack Compose Preview
+| News List |
+|-----------|
+| ![List Screenshot](screenshots/jcp_1.jpeg) | 
 
 ---
 
