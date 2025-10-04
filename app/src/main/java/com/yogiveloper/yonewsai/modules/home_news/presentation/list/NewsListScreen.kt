@@ -8,15 +8,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleCard
+import com.yogiveloper.yonewsai.ui.molecules.EmptyState
+import com.yogiveloper.yonewsai.ui.molecules.ErrorState
 import com.yogiveloper.yonewsai.ui.molecules.LoadingState
+import com.yogiveloper.yonewsai.ui.organisms.AppTopBar
+import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 
 @Composable
 fun NewsListScreen(
@@ -44,15 +46,8 @@ fun NewsListContent(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        "YoNewsAI",
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                actions = {
+            AppTopBar(
+                action = {
                     IconButton(onClick = onRefresh) {
                         Icon(
                             imageVector = Icons.Default.Refresh,
@@ -60,11 +55,7 @@ fun NewsListContent(
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
-                    titleContentColor = MaterialTheme.colorScheme.onSurface
-                )
+                }
             )
         }
     ) { padding ->
@@ -102,82 +93,10 @@ fun NewsListContent(
     }
 }
 
-@Composable
-private fun ErrorState(error: String, onRetry: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "😕",
-            style = MaterialTheme.typography.displayLarge
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = "Oops! Something went wrong",
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = error,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            onClick = onRetry,
-            modifier = Modifier
-                .fillMaxWidth(0.6f)
-                .height(48.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Refresh,
-                contentDescription = null,
-                modifier = Modifier.size(20.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text("Try Again")
-        }
-    }
-}
-
-@Composable
-private fun EmptyState() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "📰",
-            style = MaterialTheme.typography.displayLarge
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = "No news available",
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "Check back later for updates",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun ArticleCardPreview() {
-    MaterialTheme {
+    YoNewsAiTheme {
         ArticleCard(
             article = Article(
                 title = "Breaking News: Kotlin Compose Rocks 🚀",
@@ -197,7 +116,7 @@ fun ArticleCardPreview() {
 @Preview(showBackground = true)
 @Composable
 fun NewsListContentPreview() {
-    MaterialTheme {
+    YoNewsAiTheme {
         NewsListContent(
             articles = emptyList(),
             isLoading = false,
@@ -208,19 +127,11 @@ fun NewsListContentPreview() {
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun LoadingStatePreview() {
+    YoNewsAiTheme {
+        LoadingState()
+    }
+}
 
-//@Preview(showBackground = true)
-//@Composable
-//fun LoadingStatePreview() {
-//    MaterialTheme {
-//        LoadingState()
-//    }
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun ErrorStatePreview() {
-//    MaterialTheme {
-//        ErrorState(error = "Network connection failed", onRetry = {})
-//    }
-//}

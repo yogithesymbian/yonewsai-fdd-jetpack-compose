@@ -25,11 +25,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.yogiveloper.yonewsai.core.util.time.formatPublishedDate
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
-import com.yogiveloper.yonewsai.modules.home_news.presentation.components.molecules.SourceBadge
+import com.yogiveloper.yonewsai.ui.atoms.badge.AppBadge
+import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 
 @Composable
 fun ArticleCard(article: Article, onClick: () -> Unit) {
@@ -78,7 +80,7 @@ fun ArticleCard(article: Article, onClick: () -> Unit) {
                     )
 
                     if (!article.sourceName.isNullOrEmpty()) {
-                        SourceBadge(article.sourceName,
+                        AppBadge(article.sourceName,
                             Modifier
                                 .align(Alignment.TopEnd)
                                 .padding(12.dp),
@@ -139,5 +141,25 @@ fun ArticleCard(article: Article, onClick: () -> Unit) {
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ArticleCardPreview() {
+    YoNewsAiTheme {
+        ArticleCard(
+            article = Article(
+                title = "Breaking News: Kotlin Compose Rocks 🚀",
+                description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
+                sourceName = "OpenAI News",
+                urlToImage = "https://abcnews.go.com/US/large-fire-erupts-chevron-refinery-southern-california/story?id\\\\\\\\u003d126171692",
+                author = "Yogi Arif Widodo",
+                url = "https://www.washingtonpost.com/politics/2025/10/02/trump-fda-abortion-pill/",
+                publishedAt = "2025-10-02T20:12:15Z",
+                content = "The FDA has little latitude to reject generic versions of approved drugs."
+            ),
+            onClick = {}
+        )
     }
 }
