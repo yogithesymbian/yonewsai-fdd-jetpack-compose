@@ -1,28 +1,22 @@
 package com.yogiveloper.yonewsai.modules.home_news.presentation.list
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
+import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleCard
+import com.yogiveloper.yonewsai.ui.molecules.LoadingState
 
 @Composable
 fun NewsListScreen(
@@ -109,26 +103,6 @@ fun NewsListContent(
 }
 
 @Composable
-private fun LoadingState() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        CircularProgressIndicator(
-            modifier = Modifier.size(48.dp),
-            color = MaterialTheme.colorScheme.primary
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = "Loading news...",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
-
-@Composable
 private fun ErrorState(error: String, onRetry: () -> Unit) {
     Column(
         modifier = Modifier
@@ -200,137 +174,6 @@ private fun EmptyState() {
     }
 }
 
-@Composable
-fun ArticleCard(article: Article, onClick: () -> Unit) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 2.dp,
-            pressedElevation = 8.dp
-        ),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )
-    ) {
-        Column {
-            val imageUrl = article.urlToImage
-            if (!imageUrl.isNullOrEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                ) {
-                    AsyncImage(
-                        model = imageUrl,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(
-                                Brush.verticalGradient(
-                                    colors = listOf(
-                                        Color.Transparent,
-                                        Color.Black.copy(alpha = 0.3f)
-                                    )
-                                )
-                            )
-                    )
-
-                    if (!article.sourceName.isNullOrEmpty()) {
-                        Surface(
-                            modifier = Modifier
-                                .align(Alignment.TopEnd)
-                                .padding(12.dp),
-                            shape = RoundedCornerShape(8.dp),
-                            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.9f)
-                        ) {
-                            Text(
-                                text = article.sourceName,
-                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                                style = MaterialTheme.typography.labelSmall,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
-                            )
-                        }
-                    }
-                }
-            }
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Text(
-                    text = article.title ?: "",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-
-                if (!article.description.isNullOrEmpty()) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = article.description,
-                        style = MaterialTheme.typography.bodyMedium,
-                        maxLines = 3,
-                        overflow = TextOverflow.Ellipsis,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(12.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    if (!article.author.isNullOrEmpty()) {
-                        Text(
-                            text = article.author,
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.primary,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-
-                    if (!article.publishedAt.isNullOrEmpty()) {
-                        Text(
-                            text = formatPublishedDate(article.publishedAt),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-// Helper function to format date Todo Utils
-private fun formatPublishedDate(publishedAt: String): String {
-    return try {
-        val parts = publishedAt.split("T")
-        if (parts.isNotEmpty()) parts[0] else publishedAt
-    } catch (e: Exception) {
-        publishedAt
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun ArticleCardPreview() {
@@ -340,7 +183,7 @@ fun ArticleCardPreview() {
                 title = "Breaking News: Kotlin Compose Rocks 🚀",
                 description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
                 sourceName = "OpenAI News",
-                urlToImage = "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2GL6CGJ2H276MXKU5XT6XH6IYE.jpg&w=1440",
+                urlToImage = "https://abcnews.go.com/US/large-fire-erupts-chevron-refinery-southern-california/story?id\\\\\\\\u003d126171692",
                 author = "Yogi Arif Widodo",
                 url = "https://www.washingtonpost.com/politics/2025/10/02/trump-fda-abortion-pill/",
                 publishedAt = "2025-10-02T20:12:15Z",
@@ -353,16 +196,31 @@ fun ArticleCardPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun LoadingStatePreview() {
+fun NewsListContentPreview() {
     MaterialTheme {
-        LoadingState()
+        NewsListContent(
+            articles = emptyList(),
+            isLoading = false,
+            error = null,
+            onRefresh = { },
+            onOpenDetail = { }
+        )
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ErrorStatePreview() {
-    MaterialTheme {
-        ErrorState(error = "Network connection failed", onRetry = {})
-    }
-}
+
+//@Preview(showBackground = true)
+//@Composable
+//fun LoadingStatePreview() {
+//    MaterialTheme {
+//        LoadingState()
+//    }
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun ErrorStatePreview() {
+//    MaterialTheme {
+//        ErrorState(error = "Network connection failed", onRetry = {})
+//    }
+//}
