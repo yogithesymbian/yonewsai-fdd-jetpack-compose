@@ -16,6 +16,7 @@ The app consumes data from [NewsAPI.org](https://newsapi.org) and demonstrates m
 - **Retrofit + Moshi** for network calls.  
 - **Coil** for image loading.  
 - Error & loading state handling.
+- Dark theme support.
   
 NB: build gradle still not clean need to use lib.version.toml ( Lint Code Analysis )
 
