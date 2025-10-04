@@ -71,7 +71,7 @@ fun AppButton(
 
     val buttonShape: Shape = when (shape) {
         AppButtonShape.Rounded -> RoundedCornerShape(12.dp)
-        AppButtonShape.Pill -> androidx.compose.foundation.shape.RoundedCornerShape(50) // atau CircleShape
+        AppButtonShape.Pill -> androidx.compose.foundation.shape.RoundedCornerShape(50)
         AppButtonShape.Full -> androidx.compose.foundation.shape.RoundedCornerShape(0.dp)
     }
 
@@ -82,7 +82,7 @@ fun AppButton(
             modifier = modifier,
             shape = buttonShape,
             colors = buttonColors,
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp) // Padding yang sesuai untuk TextButton
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
             AppButtonContent(isLoading, icon, text)
         }
@@ -90,7 +90,9 @@ fun AppButton(
         Button(
             onClick = onClick,
             enabled = enabled && !isLoading,
-            modifier = modifier
+            modifier = modifier,
+            shape = buttonShape,
+            colors = buttonColors,
         ) {
             AppButtonContent(isLoading, icon, text)
         }
