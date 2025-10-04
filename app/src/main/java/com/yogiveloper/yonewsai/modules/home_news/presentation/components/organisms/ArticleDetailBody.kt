@@ -37,7 +37,7 @@ fun ArticleDetailBody(
     Column (
         modifier = Modifier
             .fillMaxWidth()
-            .padding(20.dp)
+            .padding(horizontal = 20.dp)
     ){
         if (!article.description.isNullOrEmpty()) {
             Text(

@@ -82,12 +82,14 @@ private fun ArticleDetailContent(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
+
     ) {
         article.urlToImage?.let { imageUrl ->
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(280.dp)
+                    .padding(bottom = 20.dp)
             ) {
                 AsyncImage(
                     model = imageUrl,
