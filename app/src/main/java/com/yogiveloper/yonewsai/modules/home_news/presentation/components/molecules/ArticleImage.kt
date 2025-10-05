@@ -11,11 +11,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.SubcomposeAsyncImage
 import com.yogiveloper.yonewsai.ui.atoms.badge.AppBadge
 import com.yogiveloper.yonewsai.ui.molecules.ImageWithOverlay
 import com.yogiveloper.yonewsai.ui.organisms.AppShimmer
+import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 
 /**
  * Defines the visual shape variants for the ArticleImage.
@@ -79,10 +81,24 @@ fun ArticleImage(
         if (!sourceName.isNullOrEmpty()) {
             AppBadge(
                 sourceName,
-                modifier = Modifier
+                Modifier
                     .align(Alignment.TopEnd)
-                    .padding(12.dp)
+                    .padding(12.dp),
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ArticleImagePreview(){
+    YoNewsAiTheme {
+        ArticleImage(
+            imageUrl = "",
+            sourceName = "BADGE",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+        )
     }
 }

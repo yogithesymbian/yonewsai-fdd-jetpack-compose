@@ -1,12 +1,16 @@
 package com.yogiveloper.yonewsai.ui.atoms.badge
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
@@ -15,16 +19,22 @@ import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 fun AppBadge(
     text: String,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = Color.Black.copy(alpha = 0.6f),
-    textColor: Color = Color.White
+    textColor: Color = MaterialTheme.colorScheme.onPrimaryContainer
 ) {
-    Text(
-        text = text,
-        color = textColor,
-        modifier = modifier
-            .background(backgroundColor, RoundedCornerShape(8.dp))
-            .padding(horizontal = 8.dp, vertical = 4.dp)
-    )
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.primaryContainer
+    ) {
+        Text(
+            text = text.uppercase(),
+            color = textColor,
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.labelMedium,
+            modifier = Modifier
+                .padding(horizontal = 12.dp, vertical = 6.dp)
+        )
+    }
 }
 
 

@@ -33,7 +33,7 @@ fun ArticleDetailHeader(article: Article) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(280.dp)
-                    .padding(bottom = 20.dp)
+                    .padding(bottom = 12.dp)
             )
         }
         Column(
@@ -44,7 +44,6 @@ fun ArticleDetailHeader(article: Article) {
             if (!article.sourceName.isNullOrEmpty()) {
                 AppBadge(
                     article.sourceName,
-                    modifier = Modifier.padding(bottom = 16.dp)
                 )
             }
 
