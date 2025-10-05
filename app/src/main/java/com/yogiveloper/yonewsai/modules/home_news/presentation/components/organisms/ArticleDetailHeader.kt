@@ -17,62 +17,76 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yogiveloper.yonewsai.core.util.time.formatPublishedDate
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
+import com.yogiveloper.yonewsai.modules.home_news.presentation.components.molecules.ArticleImage
+import com.yogiveloper.yonewsai.modules.home_news.presentation.components.molecules.ArticleImageShape
 import com.yogiveloper.yonewsai.ui.atoms.badge.AppBadge
 import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 
 @Composable
 fun ArticleDetailHeader(article: Article) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-    ){
-        if (!article.sourceName.isNullOrEmpty()) {
-            AppBadge(
-                article.sourceName,
-                modifier = Modifier.padding(bottom = 16.dp)
+    Column {
+        article.urlToImage?.let { imageUrl ->
+            ArticleImage(
+                imageUrl = imageUrl,
+                sourceName = null,
+                shape = ArticleImageShape.Sharp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(280.dp)
+                    .padding(bottom = 12.dp)
             )
         }
-
-        Text(
-            text = article.title ?: "",
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 20.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .padding(horizontal = 20.dp)
         ) {
-            Column(modifier = Modifier.weight(1f)) {
-                if (!article.author.isNullOrEmpty()) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+            if (!article.sourceName.isNullOrEmpty()) {
+                AppBadge(
+                    article.sourceName,
+                )
+            }
+
+            Text(
+                text = article.title ?: "",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 20.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    if (!article.author.isNullOrEmpty()) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = "By ",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = article.author,
+                                style = MaterialTheme.typography.bodySmall,
+                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+
+                    if (!article.publishedAt.isNullOrEmpty()) {
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "By ",
+                            text = formatPublishedDate(article.publishedAt),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        Text(
-                            text = article.author,
-                            style = MaterialTheme.typography.bodySmall,
-                            fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.primary
-                        )
                     }
-                }
-
-                if (!article.publishedAt.isNullOrEmpty()) {
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = formatPublishedDate(article.publishedAt),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
                 }
             }
         }

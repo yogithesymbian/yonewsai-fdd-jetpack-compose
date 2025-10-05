@@ -1,13 +1,10 @@
 package com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,18 +16,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import com.yogiveloper.yonewsai.core.util.time.formatPublishedDate
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
-import com.yogiveloper.yonewsai.ui.atoms.badge.AppBadge
+import com.yogiveloper.yonewsai.modules.home_news.presentation.components.molecules.ArticleImage
 import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 
 @Composable
@@ -52,41 +44,13 @@ fun ArticleCard(article: Article, onClick: () -> Unit) {
         Column {
             val imageUrl = article.urlToImage
             if (!imageUrl.isNullOrEmpty()) {
-                Box(
+                ArticleImage(
+                    imageUrl = imageUrl,
+                    sourceName = article.sourceName,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
-                ) {
-                    AsyncImage(
-                        model = imageUrl,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(
-                                Brush.verticalGradient(
-                                    colors = listOf(
-                                        Color.Transparent,
-                                        Color.Black.copy(alpha = 0.3f)
-                                    )
-                                )
-                            )
-                    )
-
-                    if (!article.sourceName.isNullOrEmpty()) {
-                        AppBadge(article.sourceName,
-                            Modifier
-                                .align(Alignment.TopEnd)
-                                .padding(12.dp),
-                        )
-                    }
-                }
+                )
             }
 
             Column(
