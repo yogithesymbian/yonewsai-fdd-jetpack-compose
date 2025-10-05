@@ -89,7 +89,7 @@ fun ArticleImage(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Default State (Error)")
 @Composable
 fun ArticleImagePreview(){
     YoNewsAiTheme {
@@ -100,5 +100,29 @@ fun ArticleImagePreview(){
                 .fillMaxWidth()
                 .height(200.dp)
         )
+    }
+}
+
+@Preview(showBackground = true, name = "Loading State (Shimmer)")
+@Composable
+fun ArticleImageLoadingPreview() {
+    YoNewsAiTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+        ) {
+            AppShimmer(modifier = Modifier.fillMaxSize())
+
+            ImageWithOverlay()
+
+            AppBadge(
+                "BADGE",
+                Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(12.dp)
+            )
+        }
     }
 }
