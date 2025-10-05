@@ -1,7 +1,6 @@
 package com.yogiveloper.yonewsai.modules.home_news.presentation.detail
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -18,13 +17,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailBody
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailHeader
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailEmptyState
 import com.yogiveloper.yonewsai.ui.organisms.AppTopBar
 import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
+import androidx.core.net.toUri
+import coil3.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,7 +64,7 @@ fun NewsDetailScreen(article: Article?, onBack: () -> Unit) {
                 modifier = Modifier.padding(padding),
                 onOpenOriginal = {
                     article.url?.let { url ->
-                        ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                        ctx.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
                     }
                 }
             )
