@@ -86,6 +86,7 @@ dependencies {
 
     // Image loader
     implementation(libs.coil.compose)
+    implementation(libs.coil.okhttp)
 
     // Coroutines
     implementation(libs.coroutines.android)
