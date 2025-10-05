@@ -87,6 +87,8 @@ dependencies {
     // Image loader
     implementation(libs.coil.compose)
     implementation(libs.coil.okhttp)
+    implementation(libs.compose.shimmer)
+
 
     // Coroutines
     implementation(libs.coroutines.android)

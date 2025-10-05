@@ -11,9 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,7 +21,6 @@ import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organi
 import com.yogiveloper.yonewsai.ui.organisms.AppTopBar
 import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 import androidx.core.net.toUri
-import coil3.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,46 +80,14 @@ private fun ArticleDetailContent(
             .verticalScroll(rememberScrollState())
 
     ) {
-        article.urlToImage?.let { imageUrl ->
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(280.dp)
-                    .padding(bottom = 20.dp)
-            ) {
-                AsyncImage(
-                    model = imageUrl,
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
+        ArticleDetailHeader(article)
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(
-                                    Color.Transparent,
-                                    Color.Black.copy(alpha = 0.6f)
-                                ),
-                                startY = 100f
-                            )
-                        )
-                )
-            }
-        }
+        HorizontalDivider(
+            modifier = Modifier.padding(vertical = 16.dp),
+            thickness = DividerDefaults.Thickness, color = MaterialTheme.colorScheme.outlineVariant
+        )
 
-        Column {
-            ArticleDetailHeader(article)
-
-            HorizontalDivider(
-                modifier = Modifier.padding(vertical = 16.dp),
-                thickness = DividerDefaults.Thickness, color = MaterialTheme.colorScheme.outlineVariant
-            )
-
-            ArticleDetailBody(article, onOpenOriginal)
-        }
+        ArticleDetailBody(article, onOpenOriginal)
     }
 }
 

@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.yogiveloper.yonewsai.ui.atoms.button.AppButton
+import com.yogiveloper.yonewsai.ui.atoms.button.AppPrimaryButton
 import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 
 @Composable
@@ -47,7 +47,7 @@ fun ErrorState(error: String, onRetry: () -> Unit) {
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(modifier = Modifier.height(24.dp))
-        AppButton(
+        AppPrimaryButton(
             "Try Again",
             onClick = onRetry,
             modifier = Modifier

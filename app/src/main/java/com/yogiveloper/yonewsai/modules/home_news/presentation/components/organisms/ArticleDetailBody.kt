@@ -18,9 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
-import com.yogiveloper.yonewsai.ui.atoms.button.AppButton
 import com.yogiveloper.yonewsai.ui.atoms.button.AppButtonShape
-import com.yogiveloper.yonewsai.ui.atoms.button.AppButtonVariant
+import com.yogiveloper.yonewsai.ui.atoms.button.AppPrimaryButton
 import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 
 @Composable
@@ -74,14 +73,13 @@ fun ArticleDetailBody(
                     modifier = Modifier.padding(bottom = 12.dp)
                 )
 
-                AppButton(
+                AppPrimaryButton(
                     text = "Read Full Article",
                     onClick = onOpenOriginal,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(52.dp),
                     shape = AppButtonShape.Rounded,
-                    variant = AppButtonVariant.Primary,
                     icon = Icons.Default.OpenInBrowser
                 )
             }
