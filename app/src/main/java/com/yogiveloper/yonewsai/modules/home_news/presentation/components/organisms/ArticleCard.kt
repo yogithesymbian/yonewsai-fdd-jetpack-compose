@@ -73,7 +73,7 @@ fun ArticleCard(article: Article, onClick: () -> Unit) {
                         text = article.description,
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 3,
-                        overflow = TextOverflow.Ellipsis,
+                        overflow = TextOverflow.Ellipsis, // <-- Memberi '...' jika teks terlalu panjang
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -91,7 +91,7 @@ fun ArticleCard(article: Article, onClick: () -> Unit) {
                             color = MaterialTheme.colorScheme.primary,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f) // <-- Penting untuk teks panjang
                         )
                     }
 
