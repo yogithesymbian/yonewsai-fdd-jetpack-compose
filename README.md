@@ -48,12 +48,12 @@ com.yogiveloper.yonewsai
 ## 📸 Screenshots
 | News List | News Detail (1) | News Detail (2) |
 |-----------|-------------|-------------|
-| ![List Screenshot](screenshots/news_list_v2.jpeg) | ![Detail Screenshot](screenshots/news_detail_v2_1.jpeg) | ![Detail Screenshot](screenshots/news_detail_v2_2.jpeg) |
+| ![List Screenshot](screenshots/news_list_v2.webp) | ![Detail Screenshot](screenshots/news_detail_v2_1.webp) | ![Detail Screenshot](screenshots/news_detail_v2_2.webp) |
 
 ### 🖼️ Jetpack Compose Preview
 | News List |
 |-----------|
-| ![List Screenshot](screenshots/news_list_jcp_v2.jpeg) | 
+| ![List Screenshot](screenshots/news_list_jcp_v2.webp) | 
 
 ---
 
