@@ -143,7 +143,7 @@ fun ArticleCardPreview() {
                 title = "Breaking News: Kotlin Compose Rocks 🚀",
                 description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
                 sourceName = "OpenAI News",
-                urlToImage = "https://abcnews.go.com/US/large-fire-erupts-chevron-refinery-southern-california/story?id\\\\\\\\u003d126171692",
+                urlToImage = "https://picsum.photos/200/300",
                 author = "Yogi Arif Widodo",
                 url = "https://www.washingtonpost.com/politics/2025/10/02/trump-fda-abortion-pill/",
                 publishedAt = "2025-10-02T20:12:15Z",

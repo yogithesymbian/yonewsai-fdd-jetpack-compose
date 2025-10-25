@@ -8,9 +8,9 @@ import javax.inject.Inject
 class GetTopHeadlinesUseCase @Inject constructor(
     private val repo: NewsRepository
 ) {
-    suspend operator fun invoke(country: String = "us"): Resource<List<Article>> {
+    suspend operator fun invoke(country: String = "us", category: String = "technology"): Resource<List<Article>> {
         return try {
-            val list = repo.getTopHeadlines(country)
+            val list = repo.getTopHeadlines(country, category)
             Resource.Success(list)
         } catch (e: Exception) {
             Resource.Error(e.localizedMessage ?: "Unknown error")

@@ -12,9 +12,9 @@ import javax.inject.Singleton
 class NewsRepositoryImpl @Inject constructor(
     private val api: NewsApiService
 ) : NewsRepository {
-    override suspend fun getTopHeadlines(country: String): List<Article> {
+    override suspend fun getTopHeadlines(country: String, category: String): List<Article> {
         try {
-            val resp = api.getTopHeadlines(country = country)
+            val resp = api.getTopHeadlines(country = country, category= category)
             if (resp.status == "ok") {
                 Log.d("NewsRepositoryImpl", "ass")
                 Log.d("NewsRepositoryImpl", "asd ${resp.totalResults}")

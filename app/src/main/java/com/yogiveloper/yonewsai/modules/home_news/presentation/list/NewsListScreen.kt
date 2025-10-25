@@ -81,7 +81,6 @@ fun NewsListContent(
         topBar = {
             AppTopBar(
                 action = {
-
                     IconButton(onClick = onRefresh) {
                         Icon(
                             imageVector = Icons.Default.Refresh,
