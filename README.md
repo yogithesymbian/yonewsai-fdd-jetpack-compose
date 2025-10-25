@@ -55,6 +55,18 @@ com.yogiveloper.yonewsai
 |-----------|
 | ![List Screenshot](screenshots/news_list_jcp_v2.webp) | 
 
+### 🦊 Highlight TODO
+<img width="1872" height="1184" alt="Image" src="https://github.com/user-attachments/assets/361917de-ccb4-46dc-a724-882010efc04e" />
+
+- [ ] Slicing the UI from [dribble news mobile](https://dribbble.com/shots/20776712-GoRead-News-App)
+- - [ ] home
+- - - [x] YoBreakingNews 
+- - - [ ] Recommendation
+- - [ ] discover
+- - [ ] details
+- [ ] Shared Element Transition [guide](https://developer.android.com/develop/ui/compose/animation/shared-elements)
+- - [ ] with navigation compose
+
 ---
 
 ## 🛠️ Tech Stack
