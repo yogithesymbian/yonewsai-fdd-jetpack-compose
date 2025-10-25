@@ -68,7 +68,7 @@ fun ArticleCard(
                     .height(180.dp),
                 contentScale = ContentScale.Crop
             )
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier.padding(16.dp).animateContentSize()) {
                 Text(
                     text = article.title ?: "No Title",
                     style = MaterialTheme.typography.titleMedium,

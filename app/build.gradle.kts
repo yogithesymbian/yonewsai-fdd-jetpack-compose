@@ -63,6 +63,9 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
 
+    implementation("com.google.accompanist:accompanist-pager:0.32.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.32.0")
+
     // Lifecycle extra
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 

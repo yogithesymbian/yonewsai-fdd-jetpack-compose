@@ -18,9 +18,9 @@ import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailBody
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailHeader
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailEmptyState
-import com.yogiveloper.yonewsai.ui.organisms.AppTopBar
 import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 import androidx.core.net.toUri
+import com.yogiveloper.yonewsai.ui.organisms.AppTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
