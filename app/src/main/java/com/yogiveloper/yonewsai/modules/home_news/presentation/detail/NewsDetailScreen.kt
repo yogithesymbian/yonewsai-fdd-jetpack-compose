@@ -2,7 +2,6 @@ package com.yogiveloper.yonewsai.modules.home_news.presentation.detail
 
 import android.content.Intent
 import androidx.compose.animation.AnimatedContentScope
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
@@ -19,13 +18,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailBody
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailHeader
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailEmptyState
-import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 import androidx.core.net.toUri
 import com.yogiveloper.yonewsai.ui.organisms.AppTopBar
 
