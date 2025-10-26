@@ -15,6 +15,7 @@ class NewsListScreenTest {
     fun articleTitleIsDisplayed() {
         val items = listOf(
             Article(
+                1,
                 "Source",
                 "Author",
                 "Test Title",

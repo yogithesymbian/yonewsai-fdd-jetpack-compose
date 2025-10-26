@@ -25,14 +25,15 @@ class GetTopHeadlinesUseCaseTest {
         runBlocking {
             val fake = listOf(
                 Article(
-                    "Source",
+                    1,
                     "Author",
                     "Title",
                     "Desc",
                     "url",
                     "img",
                     "2025-10-01",
-                    "content"
+                    "content",
+                    ""
                 )
             )
             whenever(repo.getTopHeadlines()).thenReturn(fake)
