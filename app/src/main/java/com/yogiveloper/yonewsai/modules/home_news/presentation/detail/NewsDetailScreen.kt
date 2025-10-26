@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -38,43 +39,59 @@ fun NewsDetailScreen(
     onBack: () -> Unit
 ) {
     val ctx = LocalContext.current
+
+    // ✅ Remember last valid article, automatically saved because it's Parcelable
+    val lastValidArticle = rememberSaveable { mutableStateOf<Article?>(article) }
+
+    // ✅ Update retained article only when a new one is available (not null)
+    LaunchedEffect(article) {
+        if (article != null) {
+            lastValidArticle.value = article
+        }
+    }
+
+    val articleToShow = lastValidArticle.value
+
     Scaffold(
         topBar = {
             AppTopBar(
-                 "Article Details",
-                 {
-                    IconButton(
-                        onClick = {
-                            val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                                type = "text/plain"
-                                putExtra(Intent.EXTRA_SUBJECT, article?.title ?: "")
-                                putExtra(Intent.EXTRA_TEXT, "${article?.title}\n\n${article?.url}")
+                title = "Article Details",
+                action = {
+                    if (articleToShow != null) {
+                        IconButton(
+                            onClick = {
+                                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(Intent.EXTRA_SUBJECT, articleToShow.title ?: "")
+                                    putExtra(Intent.EXTRA_TEXT, "${articleToShow.title}\n\n${articleToShow.url}")
+                                }
+                                ctx.startActivity(Intent.createChooser(shareIntent, "Share via"))
                             }
-                            ctx.startActivity(Intent.createChooser(shareIntent, "Share via"))
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Share,
+                                contentDescription = "Share",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
                         }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Share,
-                            contentDescription = "Share",
-                            tint = MaterialTheme.colorScheme.primary
-                        )
                     }
                 },
                 onBack = onBack
             )
         }
     ) { padding ->
-        if (article == null) {
+        if (articleToShow == null) {
+            // ✅ Show empty state only if the screen never received a valid article
             ArticleDetailEmptyState(modifier = Modifier.padding(padding))
         } else {
             ArticleDetailContent(
-                sharedTransitionScope,
-                animatedContentScope,
-                id,
-                article = article,
+                sharedTransitionScope = sharedTransitionScope,
+                animatedContentScope = animatedContentScope,
+                id = id,
+                article = articleToShow,
                 modifier = Modifier.padding(padding),
                 onOpenOriginal = {
-                    article.url?.let { url ->
+                    articleToShow.url?.let { url ->
                         ctx.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
                     }
                 }
@@ -82,6 +99,7 @@ fun NewsDetailScreen(
         }
     }
 }
+
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun ArticleDetailContent(

@@ -41,7 +41,7 @@ fun NavGraph(navController: NavHostController) {
                     this@composable,
                     id = id,
                     article = article,
-                    onBack = { navController.navigateUp() }
+                    onBack = { navController.popBackStack() }
                 )
             }
             composable("list") {
