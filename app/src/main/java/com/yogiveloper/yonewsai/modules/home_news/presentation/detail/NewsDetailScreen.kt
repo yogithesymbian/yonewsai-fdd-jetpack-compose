@@ -274,8 +274,9 @@ private fun ArticleDetailContent(
                             modifier = Modifier.fillMaxSize()
                         ) {
                             Text(
-                                text = "CNN",
+                                text = "SALT",
                                 style = MaterialTheme.typography.labelSmall,
+                                color = Color.White,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold
                             )
@@ -285,7 +286,7 @@ private fun ArticleDetailContent(
                     Spacer(modifier = Modifier.width(12.dp))
 
                     Text(
-                        text = article.sourceName ?: "CNN Indonesia",
+                        text = article.sourceName ?: "Salt",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurface

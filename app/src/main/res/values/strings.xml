@@ -2,4 +2,6 @@
     <string name="app_name">YoNewsAi</string>
     <string name="trending">Trending</string>
     <string name="technology">Technology</string>
+    <string name="hide">Hide</string>
+    <string name="read_more">Read More...</string>
 </resources>

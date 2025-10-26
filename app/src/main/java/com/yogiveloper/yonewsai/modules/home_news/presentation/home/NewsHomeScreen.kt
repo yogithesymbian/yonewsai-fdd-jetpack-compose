@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
@@ -80,6 +81,7 @@ fun NewsHomeContent(
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun HomeAppBar() {
     Row(
@@ -90,7 +92,10 @@ fun HomeAppBar() {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = {}) {
+        IconButton(
+            onClick = {},
+            colors = IconButtonDefaults.iconButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
+        ) {
             Icon(
                 imageVector = Icons.Default.Menu,
                 contentDescription = "Menu",
@@ -99,7 +104,10 @@ fun HomeAppBar() {
         }
 
         Row {
-            IconButton(onClick = {}) {
+            IconButton(
+                onClick = {},
+                colors = IconButtonDefaults.iconButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
+            ) {
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = "Search",
@@ -107,7 +115,10 @@ fun HomeAppBar() {
                 )
             }
             Box {
-                IconButton(onClick = {}) {
+                IconButton(
+                    onClick = {},
+                            colors = IconButtonDefaults.iconButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
+                ) {
                     Icon(
                         imageVector = Icons.Default.Notifications,
                         contentDescription = "Notifications",
