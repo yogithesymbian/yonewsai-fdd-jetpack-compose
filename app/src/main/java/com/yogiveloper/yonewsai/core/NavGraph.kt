@@ -23,30 +23,30 @@ fun NavGraph(navController: NavHostController) {
                     this@SharedTransitionLayout,
                     this@composable,
                             onOpenDetail = { article ->
-                                // navController.currentBackStackEntry?.savedStateHandle?.set("article", article)
-                                backStackEntry.savedStateHandle["article"] = article
+                                // backStackEntry.savedStateHandle["article"] = article
                                 navController.navigate("detail/${article.id}")
                             }
                 )
             }
             composable(
-                "detail/{item}",
-                arguments = listOf(navArgument("item") { type = NavType.IntType } )
+                "detail/{articleID}",
+                arguments = listOf(navArgument("articleID") { type = NavType.IntType } )
             ) { backStackEntry ->
-                val id = backStackEntry.arguments?.getInt("item")
-                val article =
-                    navController.previousBackStackEntry?.savedStateHandle?.get<Article>("article")
+                val id = backStackEntry.arguments?.getInt("articleID")
+                // val article = navController.previousBackStackEntry?.savedStateHandle?.get<Article>("article")
+                if (id == null) {
+                    navController.popBackStack()
+                    return@composable
+                }
                 NewsDetailScreen(
                     this@SharedTransitionLayout,
                     this@composable,
-                    id = id,
-                    article = article,
                     onBack = { navController.popBackStack() }
                 )
             }
             composable("list") {
                 NewsListScreen(onOpenDetail = { article ->
-                    navController.currentBackStackEntry?.savedStateHandle?.set("article", article)
+                    // navController.currentBackStackEntry?.savedStateHandle?.set("article", article)
                     navController.navigate("detail")
                 })
             }

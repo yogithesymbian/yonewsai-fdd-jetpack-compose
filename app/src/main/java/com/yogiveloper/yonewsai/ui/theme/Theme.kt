@@ -64,7 +64,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun YoNewsAiTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-10-26T08:25:22.871042Z">
+        <DropdownSelection timestamp="2025-10-26T18:59:41.959362Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="Default" identifier="serial=192.168.1.4:5555;connection=39e225b5" />
+              <DeviceId pluginId="Default" identifier="serial=192.168.1.4:5555;connection=4cd77d22" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -17,6 +17,9 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="ArticleCardPreview">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="app (Release)">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
