@@ -8,7 +8,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.presentation.detail.NewsDetailScreen
 import com.yogiveloper.yonewsai.modules.home_news.presentation.home.NewsHomeScreen
 import com.yogiveloper.yonewsai.modules.home_news.presentation.list.NewsListScreen
