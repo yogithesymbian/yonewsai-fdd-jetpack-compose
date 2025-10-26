@@ -68,7 +68,7 @@ fun ArticleCard(
                     .height(180.dp),
                 contentScale = ContentScale.Crop
             )
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier.padding(16.dp).animateContentSize()) {
                 Text(
                     text = article.title ?: "No Title",
                     style = MaterialTheme.typography.titleMedium,
@@ -140,10 +140,11 @@ fun ArticleCardPreview() {
     YoNewsAiTheme {
         ArticleCard(
             article = Article(
+                id = 1,
                 title = "Breaking News: Kotlin Compose Rocks 🚀",
                 description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
                 sourceName = "OpenAI News",
-                urlToImage = "https://abcnews.go.com/US/large-fire-erupts-chevron-refinery-southern-california/story?id\\\\\\\\u003d126171692",
+                urlToImage = "https://picsum.photos/200/300",
                 author = "Yogi Arif Widodo",
                 url = "https://www.washingtonpost.com/politics/2025/10/02/trump-fda-abortion-pill/",
                 publishedAt = "2025-10-02T20:12:15Z",

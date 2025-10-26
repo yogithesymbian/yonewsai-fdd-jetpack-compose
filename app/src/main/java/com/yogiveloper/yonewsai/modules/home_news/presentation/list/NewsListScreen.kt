@@ -1,6 +1,8 @@
 package com.yogiveloper.yonewsai.modules.home_news.presentation.list
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -120,11 +122,18 @@ fun NewsListContent(
                                 onClick = { onOpenDetail(article) },
                                 modifier = Modifier
                                     .animateItem(
-                                        placementSpec = tween(durationMillis = 600)
+                                        fadeInSpec = tween(400),
+                                        fadeOutSpec = tween(300),
+                                        placementSpec = spring(
+                                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                                            stiffness = Spring.StiffnessLow
+                                        )
+
                                     )
                             )
                         }
                     }
+
                 }
             }
         }
@@ -133,28 +142,34 @@ fun NewsListContent(
 
 @Preview(showBackground = true)
 @Composable
-fun ArticleCardPreview() {
+fun NewsListContentPreview() {
+    val dummyListArticle = List(5 ) { index ->
+        Article(
+            id = 1,
+            title = "Breaking News: Kotlin Compose Rocks 🚀",
+            description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
+            sourceName = "OpenAI News",
+            urlToImage = "https://abcnews.go.com/US/large-fire-erupts-chevron-refinery-southern-california/story?id\\\\\\\\u003d126171692",
+            author = "Yogi Arif Widodo",
+            url = "$index",
+            publishedAt = "2025-10-02T20:12:15Z",
+            content = "The FDA has little latitude to reject generic versions of approved drugs."
+        )
+    }
     YoNewsAiTheme {
-        ArticleCard(
-            article = Article(
-                title = "Breaking News: Kotlin Compose Rocks 🚀",
-                description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
-                sourceName = "OpenAI News",
-                urlToImage = "https://abcnews.go.com/US/large-fire-erupts-chevron-refinery-southern-california/story?id\\\\\\\\u003d126171692",
-                author = "Yogi Arif Widodo",
-                url = "https://www.washingtonpost.com/politics/2025/10/02/trump-fda-abortion-pill/",
-                publishedAt = "2025-10-02T20:12:15Z",
-                content = "The FDA has little latitude to reject generic versions of approved drugs."
-            ),
-            onClick = {},
-            modifier = Modifier
+        NewsListContent(
+            articles = dummyListArticle,
+            isLoading = false,
+            error = null,
+            onRefresh = { },
+            onOpenDetail = { }
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun NewsListContentPreview() {
+fun NewsListContentPreviewEmpty() {
     YoNewsAiTheme {
         NewsListContent(
             articles = emptyList(),

@@ -5,13 +5,13 @@ import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.domain.repository.NewsRepository
 import javax.inject.Inject
 
-class GetTopHeadlinesUseCase @Inject constructor(
+class GetArticleByIdUseCase @Inject constructor(
     private val repo: NewsRepository
 ) {
-    suspend operator fun invoke(country: String = "us", category: String = "technology"): Resource<List<Article>> {
+    suspend operator fun invoke(id: Int) : Resource<Article> {
         return try {
-            val list = repo.getTopHeadlines(country, category)
-            Resource.Success(list)
+            val article = repo.getArticleById(id)
+            Resource.Success(article)
         } catch (e: Exception) {
             Resource.Error(e.localizedMessage ?: "Unknown error")
         }

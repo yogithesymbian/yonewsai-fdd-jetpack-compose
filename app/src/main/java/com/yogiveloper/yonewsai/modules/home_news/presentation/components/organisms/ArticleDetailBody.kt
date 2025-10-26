@@ -102,6 +102,7 @@ fun NewsDetailBodyScreenPreview() {
     YoNewsAiTheme {
         ArticleDetailBody(
             article = Article(
+                id = 1,
                 title = "Breaking News: Kotlin Compose Revolutionizes Android Development",
                 description = "Jetpack Compose is transforming how developers build Android UIs with its modern, declarative approach that simplifies the development process.",
                 sourceName = "Tech News Daily",
