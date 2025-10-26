@@ -22,19 +22,24 @@ class NewsRepositoryImpl @Inject constructor(
     override suspend fun getTopHeadlines(country: String, category: String): List<Article> {
         try {
             val resp = api.getTopHeadlines(country = country, category= category)
-            if (resp.status == "ok") {
-                articleCache.clear()
-                return resp.articles.mapIndexed { index, it ->
-                    val uniqueID = it.url
-                    if(uniqueID !== null){
-                        articleCache[uniqueID] = it.toDomain(index)
-                    }
-                    it.toDomain(index)
-                }
-            } else {
-                Log.e("NewsRepositoryImpl", "API returned an error status: ${resp.status}")
-                throw Exception("NewsAPI error: ${resp.status}")
+            // Use require() to validate the response status, which throws an exception if false.
+            require(resp.status == "ok") {
+                "API returned an error status: ${resp.status}"
             }
+
+            val domainArticles = resp.articles.mapIndexed { index, articleDto ->
+                articleDto.toDomain(index)
+            }
+
+            /**
+             * Clear the cache and then populate it with the new articles.
+             * articleCache.putAll(...) is then used to efficiently
+             * add all the new articles to the cache in one go.
+             * */
+            articleCache.clear()
+            articleCache.putAll(domainArticles.associateBy { it.id.toString() })
+
+            return domainArticles
         } catch (e: Exception){
             Log.e("NewsRepositoryImpl", "Failed to fetch headlines", e)
             throw e
