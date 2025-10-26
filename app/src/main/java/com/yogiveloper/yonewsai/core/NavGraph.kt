@@ -40,7 +40,11 @@ fun NavGraph(navController: NavHostController) {
                 NewsDetailScreen(
                     this@SharedTransitionLayout,
                     this@composable,
-                    onBack = { navController.popBackStack() }
+                    onBack = {
+                        if (backStackEntry.lifecycle.currentState == androidx.lifecycle.Lifecycle.State.RESUMED) {
+                            navController.popBackStack()
+                        }
+                    }
                 )
             }
             composable("list") {

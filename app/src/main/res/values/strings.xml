@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YoNewsAi</string>
+    <string name="trending">Trending</string>
+    <string name="technology">Technology</string>
 </resources>

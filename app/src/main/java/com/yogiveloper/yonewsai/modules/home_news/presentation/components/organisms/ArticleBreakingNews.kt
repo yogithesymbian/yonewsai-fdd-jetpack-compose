@@ -164,12 +164,17 @@ fun BreakingNewsCard(
                     shape = RoundedCornerShape(20.dp),
                     color = Color(0xFF007AFF),
                     modifier = Modifier.wrapContentWidth()
+                        .sharedElement(
+                            sharedTransitionScope.rememberSharedContentState(key = "badge-${article.id}"),
+                            animatedVisibilityScope = animatedContentScope
+                        )
                 ) {
                     Text(
                         text = "Technology",
                         color = Color.White,
                         fontSize = 14.sp,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)
+
                     )
                 }
 
@@ -196,7 +201,11 @@ fun BreakingNewsCard(
                         Text(
                             text = "• ${getTimeAgo(article.publishedAt ?: "")}",
                             color = Color.White.copy(alpha = 0.5f),
-                            fontSize = 14.sp
+                            fontSize = 14.sp,
+                            modifier = Modifier.sharedElement(
+                                sharedTransitionScope.rememberSharedContentState("text-time-${article.id}"),
+                                animatedVisibilityScope = animatedContentScope
+                            ),
                         )
                     }
                     Spacer(modifier = Modifier.height(8.dp))

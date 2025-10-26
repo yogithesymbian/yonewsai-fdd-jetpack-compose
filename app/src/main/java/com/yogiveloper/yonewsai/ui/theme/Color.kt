@@ -13,5 +13,6 @@ val BlueSecondary40 = Color(0xFF556070) // Dark grayish blue
 val BlueTertiary40 = Color(0xFF0058B3) // Deep blue for strong contrast
 
 // Optional neutral colors
+val Adrenaline = Color(0xFFCC0000)
 // val NeutralGrey = Color(0xFFF2F2F7) // Light grey background, similar to iOS
 // val NeutralBlack = Color(0xFF1C1C1E) // Soft black, not too intense
