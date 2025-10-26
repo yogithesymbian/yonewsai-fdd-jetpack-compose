@@ -145,6 +145,7 @@ fun NewsListContent(
 fun NewsListContentPreview() {
     val dummyListArticle = List(5 ) { index ->
         Article(
+            id = 1,
             title = "Breaking News: Kotlin Compose Rocks 🚀",
             description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
             sourceName = "OpenAI News",

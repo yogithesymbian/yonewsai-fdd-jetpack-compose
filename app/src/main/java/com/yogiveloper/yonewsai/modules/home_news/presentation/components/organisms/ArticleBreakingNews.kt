@@ -1,6 +1,12 @@
 package com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +20,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -33,24 +41,24 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.rememberPagerState
 import com.yogiveloper.yonewsai.core.util.time.getTimeAgo
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.molecules.ArticleImage
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.molecules.ArticleImageShape
+import com.yogiveloper.yonewsai.ui.organisms.AppPagerIndicator
+import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun BreakingNewsSection(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     articles: List<Article>,
     isLoading: Boolean,
     error: String?,
     onOpenDetail: (Article) -> Unit
 ) {
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { articles.size })
     Column(modifier = Modifier.padding(top = 16.dp)) {
         Row(
             modifier = Modifier
@@ -61,15 +69,15 @@ fun BreakingNewsSection(
         ) {
             Text(
                 text = "YoBreaking News",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
             )
             TextButton(onClick = {}) {
                 Text(
                     text = "View all",
-                    color = Color(0xFF007AFF),
-                    fontSize = 16.sp
+                    // color = Color(0xFF007AFF),
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
         }
@@ -77,135 +85,172 @@ fun BreakingNewsSection(
         Spacer(modifier = Modifier.height(16.dp))
 
         HorizontalPager(
-            count = articles.size,
             state = pagerState,
             contentPadding = PaddingValues(horizontal = 16.dp),
-            itemSpacing = 4.dp,
-            modifier = Modifier.height(220.dp)
-                .padding(end = 16.dp)
+            pageSpacing = 4.dp,
+            modifier = Modifier
+                .height(180.dp)
+                .padding(end = 16.dp),
+            key = { page -> articles[page].title ?: articles[page].title ?: page }
         ) { page ->
-            BreakingNewsCard(articles[page])
+            BreakingNewsCard(
+                sharedTransitionScope,
+                animatedContentScope,
+                articles[page]
+            ) { onOpenDetail(articles[page]) }
         }
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        HorizontalPagerIndicator(
-            pagerState = pagerState,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            activeColor = Color(0xFF007AFF),
-            inactiveColor = Color(0xFFD1D1D6)
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun BreakingNewsSectionPreview() {
-    BreakingNewsSection(
-        articles = List(3){ page ->
-            Article(
-                title = "$page Breaking News: Kotlin Compose Rocks 🚀",
-                description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
-                sourceName = "OpenAI News",
-                urlToImage = "https://picsum.photos/seed/picsum/200/300",
-                author = "Yogi Arif Widodo",
-                url = "https://www.washingtonpost.com/politics/2025/10/02/trump-fda-abortion-pill/",
-                publishedAt = "2025-10-02T20:12:15Z",
-                content = "The FDA has little latitude to reject generic versions of approved drugs."
-            )
-        },
-        isLoading = false,
-        error = null,
-        onOpenDetail = {}
-    )
-}
-
-
-
-@Composable
-fun BreakingNewsCard(article: Article) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(220.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(Color(0xFF4A4A4A))
-    ) {
-        // Placeholder for image
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFF6B8E6B),
-                            Color(0xFF2C2C2C)
-                        )
-                    )
-                )
-        ) {
-            ArticleImage(
-                imageUrl = article.urlToImage,
-                sourceName = null,
-                shape = ArticleImageShape.Sharp,
-                modifier = Modifier
-                    .fillMaxWidth()
+        if(pagerState.pageCount > 1){
+            AppPagerIndicator(
+                pagerState= pagerState,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
-
-
-        Column(
+    }
+}
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+fun BreakingNewsCard(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
+    article: Article,
+    onClick: () -> Unit
+) {
+    with(sharedTransitionScope) {
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(20.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+                .fillMaxWidth()
+                .height(180.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .background(Color(0xFF4A4A4A))
+                .clickable(onClick = onClick),
         ) {
-            Surface(
-                shape = RoundedCornerShape(20.dp),
-                color = Color(0xFF007AFF),
-                modifier = Modifier.wrapContentWidth()
+            // Placeholder for image
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color(0xFF6B8E6B),
+                                Color(0xFF2C2C2C)
+                            )
+                        )
+                    )
             ) {
-                Text(
-                    text = "Technology",
-                    color = Color.White,
-                    fontSize = 14.sp,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)
+                ArticleImage(
+                    imageUrl = article.urlToImage,
+                    sourceName = null,
+                    shape = ArticleImageShape.Sharp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .sharedElement(
+                            sharedTransitionScope.rememberSharedContentState(key = "image-${article.id}"),
+                            animatedVisibilityScope = animatedContentScope
+                        )
                 )
             }
 
-            Column {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(20.dp),
+                    color = Color(0xFF007AFF),
+                    modifier = Modifier.wrapContentWidth()
                 ) {
                     Text(
-                        text = article.sourceName ?: "",
+                        text = "Technology",
                         color = Color.White,
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
-                    )
-                    // if (news.verified) {
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Icon(
-                        imageVector = Icons.Default.CheckCircle,
-                        contentDescription = "Verified",
-                        tint = Color(0xFF007AFF),
-                        modifier = Modifier.size(16.dp)
-                    )
-                    // }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "• ${getTimeAgo(article.publishedAt ?: "")}",
-                        color = Color.White.copy(alpha = 0.8f),
-                        fontSize = 14.sp
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)
                     )
                 }
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = article.title ?: "",
-                    style = MaterialTheme.typography.titleMedium,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
+
+                Column {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = article.sourceName ?: "",
+                            color = Color.White,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                        // if (news.verified) {
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Icon(
+                            imageVector = Icons.Default.CheckCircle,
+                            contentDescription = "Verified",
+                            tint = Color(0xFF007AFF),
+                            modifier = Modifier.size(16.dp)
+                        )
+                        // }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "• ${getTimeAgo(article.publishedAt ?: "")}",
+                            color = Color.White.copy(alpha = 0.5f),
+                            fontSize = 14.sp
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = article.title ?: "",
+                        color = Color.White.copy(alpha = 0.8f),
+                        style = MaterialTheme.typography.titleMedium,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .sharedElement(
+                                sharedTransitionScope.rememberSharedContentState(key = "text-${article.id}"),
+                                animatedVisibilityScope = animatedContentScope,
+                            )
+                    )
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Preview(showBackground = true)
+@Composable
+fun BreakingNewsSectionPreview() {
+    YoNewsAiTheme {
+        SharedTransitionLayout {
+            AnimatedContent(targetState = true, label = "preview_news") { targetState ->
+                if (targetState){
+
+                }
+                with(this@SharedTransitionLayout){
+                    BreakingNewsSection(
+                        sharedTransitionScope = this@SharedTransitionLayout,
+                        animatedContentScope = this@AnimatedContent,
+                        articles = List(3) { page ->
+                            Article(
+                                id = page,
+                                title = "$page Breaking News: Kotlin Compose Rocks 🚀",
+                                description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
+                                sourceName = "OpenAI News",
+                                urlToImage = "https://picsum.photos/seed/picsum/200/300",
+                                author = "Yogi Arif Widodo",
+                                url = "https://www.washingtonpost.com/politics/2025/10/02/trump-fda-abortion-pill/",
+                                publishedAt = "2025-10-02T20:12:15Z",
+                                content = "The FDA has little latitude to reject generic versions of approved drugs."
+                            )
+                        },
+                        isLoading = false,
+                        error = null,
+                        onOpenDetail = {}
+                    )
+                }
+
             }
         }
     }

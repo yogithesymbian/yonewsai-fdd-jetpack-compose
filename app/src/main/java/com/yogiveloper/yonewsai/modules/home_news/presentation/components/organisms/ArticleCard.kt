@@ -140,6 +140,7 @@ fun ArticleCardPreview() {
     YoNewsAiTheme {
         ArticleCard(
             article = Article(
+                id = 1,
                 title = "Breaking News: Kotlin Compose Rocks 🚀",
                 description = "Compose simplifies Android UI development with a declarative approach that makes building beautiful UIs easier than ever.",
                 sourceName = "OpenAI News",

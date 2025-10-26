@@ -1,6 +1,10 @@
 package com.yogiveloper.yonewsai.modules.home_news.presentation.detail
 
 import android.content.Intent
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -10,6 +14,8 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,9 +28,15 @@ import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 import androidx.core.net.toUri
 import com.yogiveloper.yonewsai.ui.organisms.AppTopBar
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
-fun NewsDetailScreen(article: Article?, onBack: () -> Unit) {
+fun NewsDetailScreen(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
+    id: Int?,
+    article: Article?,
+    onBack: () -> Unit
+) {
     val ctx = LocalContext.current
     Scaffold(
         topBar = {
@@ -56,6 +68,9 @@ fun NewsDetailScreen(article: Article?, onBack: () -> Unit) {
             ArticleDetailEmptyState(modifier = Modifier.padding(padding))
         } else {
             ArticleDetailContent(
+                sharedTransitionScope,
+                animatedContentScope,
+                id,
                 article = article,
                 modifier = Modifier.padding(padding),
                 onOpenOriginal = {
@@ -67,8 +82,12 @@ fun NewsDetailScreen(article: Article?, onBack: () -> Unit) {
         }
     }
 }
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun ArticleDetailContent(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
+    id: Int?,
     article: Article,
     modifier: Modifier = Modifier,
     onOpenOriginal: () -> Unit
@@ -80,7 +99,14 @@ private fun ArticleDetailContent(
             .verticalScroll(rememberScrollState())
 
     ) {
-        ArticleDetailHeader(article)
+        with(sharedTransitionScope) {
+            ArticleDetailHeader(
+                sharedTransitionScope,
+                animatedContentScope,
+                id,
+                article
+            )
+        }
 
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 16.dp),
@@ -91,22 +117,27 @@ private fun ArticleDetailContent(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun NewsDetailScreenPreview() {
-    YoNewsAiTheme {
-        NewsDetailScreen(
-            article = Article(
-                title = "Breaking News: Kotlin Compose Revolutionizes Android Development",
-                description = "Jetpack Compose is transforming how developers build Android UIs with its modern, declarative approach that simplifies the development process.",
-                sourceName = "Tech News Daily",
-                urlToImage = "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2GL6CGJ2H276MXKU5XT6XH6IYE.jpg&w=1440",
-                author = "Yogi Arif Widodo",
-                url = "https://example.com/article",
-                publishedAt = "2025-10-02T20:12:15Z",
-                content = "Jetpack Compose has emerged as a game-changer in Android development. The modern toolkit enables developers to build beautiful, responsive UIs with significantly less code than traditional View-based approaches. With its declarative syntax and powerful state management, Compose is quickly becoming the preferred choice for Android developers worldwide."
-            ),
-            onBack = {}
-        )
-    }
-}
+//@OptIn(ExperimentalSharedTransitionApi::class)
+//@Preview(showBackground = true)
+//@Composable
+//fun NewsDetailScreenPreview() {
+//    YoNewsAiTheme {
+//        NewsDetailScreen(
+//            this@SharedTransitionLayout,
+//            this@composeable,
+//            id = 1,
+//            article = Article(
+//                id = 1,
+//                title = "Breaking News: Kotlin Compose Revolutionizes Android Development",
+//                description = "Jetpack Compose is transforming how developers build Android UIs with its modern, declarative approach that simplifies the development process.",
+//                sourceName = "Tech News Daily",
+//                urlToImage = "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2GL6CGJ2H276MXKU5XT6XH6IYE.jpg&w=1440",
+//                author = "Yogi Arif Widodo",
+//                url = "https://example.com/article",
+//                publishedAt = "2025-10-02T20:12:15Z",
+//                content = "Jetpack Compose has emerged as a game-changer in Android development. The modern toolkit enables developers to build beautiful, responsive UIs with significantly less code than traditional View-based approaches. With its declarative syntax and powerful state management, Compose is quickly becoming the preferred choice for Android developers worldwide."
+//            ),
+//            onBack = {}
+//        )
+//    }
+//}

@@ -1,5 +1,6 @@
 package com.yogiveloper.yonewsai.modules.home_news.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yogiveloper.yonewsai.core.util.Resource
@@ -30,6 +31,7 @@ class NewsHomeViewModel @Inject constructor(
     }
 
     private fun fetchBreakingNews(country: String = "us", category: String = "technology") {
+        Log.d("fetchBreakingNews", "fetchBreakingNews: called")
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
             when(val r = getTopHeadlines(country, category )){

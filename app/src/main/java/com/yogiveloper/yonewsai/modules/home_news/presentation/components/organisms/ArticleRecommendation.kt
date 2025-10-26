@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -59,15 +60,14 @@ fun RecommendationSection() {
         ) {
             Text(
                 text = "Recommendation",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
             )
             TextButton(onClick = {}) {
                 Text(
                     text = "View all",
-                    color = Color(0xFF007AFF),
-                    fontSize = 16.sp
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
         }
@@ -115,15 +115,14 @@ fun RecommendationCard(item: RecommendationItem) {
             Column {
                 Text(
                     text = item.category,
-                    fontSize = 12.sp,
+                    style = MaterialTheme.typography.titleSmall,
                     color = Color.Gray
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = item.title,
-                    fontSize = 16.sp,
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.Black,
                     lineHeight = 20.sp
                 )
             }
@@ -140,13 +139,13 @@ fun RecommendationCard(item: RecommendationItem) {
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = item.author,
-                    fontSize = 12.sp,
+                    style = MaterialTheme.typography.titleSmall,
                     color = Color.Gray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "• ${item.date}",
-                    fontSize = 12.sp,
+                    style = MaterialTheme.typography.titleSmall,
                     color = Color.Gray
                 )
             }

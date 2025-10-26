@@ -16,9 +16,9 @@ class NewsRepositoryImpl @Inject constructor(
         try {
             val resp = api.getTopHeadlines(country = country, category= category)
             if (resp.status == "ok") {
-                Log.d("NewsRepositoryImpl", "ass")
-                Log.d("NewsRepositoryImpl", "asd ${resp.totalResults}")
-                return resp.articles.map { it.toDomain() }
+                Log.d("NewsRepositoryImpl", "OK")
+                Log.d("NewsRepositoryImpl", "totalResult ${resp.totalResults}")
+                return resp.articles.mapIndexed { index, it -> it.toDomain(index) }
             } else {
                 Log.e("NewsRepositoryImpl", "API returned an error status: ${resp.status}")
                 throw Exception("NewsAPI error: ${resp.status}")

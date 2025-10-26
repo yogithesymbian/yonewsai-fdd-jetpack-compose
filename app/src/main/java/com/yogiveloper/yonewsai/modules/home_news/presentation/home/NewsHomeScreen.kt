@@ -1,5 +1,8 @@
 package com.yogiveloper.yonewsai.modules.home_news.presentation.home
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,20 +16,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.BreakingNewsSection
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.RecommendationSection
 
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun NewsHomeScreen(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     vm: NewsHomeViewModel = hiltViewModel(),
     onOpenDetail: (Article) -> Unit
 ) {
     val state by vm.uiState.collectAsState()
     NewsHomeContent(
+        sharedTransitionScope,
+        animatedContentScope,
         articles = state.articles,
         isLoading = state.isLoading,
         error = state.error,
@@ -34,8 +40,11 @@ fun NewsHomeScreen(
     )
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun NewsHomeContent(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     articles: List<Article>,
     isLoading: Boolean,
     error: String?,
@@ -48,11 +57,13 @@ fun NewsHomeContent(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFFF5F5F5))
+                // .background(Color(0xFFF5F5F5))
                 .padding(padding)
         ) {
             item {
                 BreakingNewsSection(
+                    sharedTransitionScope,
+                    animatedContentScope,
                     articles = articles,
                     isLoading = isLoading,
                     error = error,
@@ -74,7 +85,7 @@ fun HomeAppBar() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -83,7 +94,7 @@ fun HomeAppBar() {
             Icon(
                 imageVector = Icons.Default.Menu,
                 contentDescription = "Menu",
-                tint = Color.Black
+                // tint = Color.Black
             )
         }
 
@@ -92,7 +103,7 @@ fun HomeAppBar() {
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = "Search",
-                    tint = Color.Black
+                    // tint = Color.Black
                 )
             }
             Box {
@@ -100,7 +111,7 @@ fun HomeAppBar() {
                     Icon(
                         imageVector = Icons.Default.Notifications,
                         contentDescription = "Notifications",
-                        tint = Color.Black
+                        // tint = Color.Black
                     )
                 }
                 Box(
@@ -118,7 +129,7 @@ fun HomeAppBar() {
 @Composable
 fun BottomNavigationBar() {
     NavigationBar(
-        containerColor = Color.White,
+        containerColor = MaterialTheme.colorScheme.background,
         modifier = Modifier.height(70.dp)
     ) {
         NavigationBarItem(
