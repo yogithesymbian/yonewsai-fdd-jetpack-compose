@@ -33,7 +33,6 @@ import com.yogiveloper.yonewsai.R
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.organisms.ArticleDetailBody
 import com.yogiveloper.yonewsai.ui.theme.Adrenaline
-import com.yogiveloper.yonewsai.ui.theme.BluePrimary40
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
@@ -46,7 +45,6 @@ fun NewsDetailScreen(
     val ctx = LocalContext.current
     val state by vm.uiState.collectAsState()
     val article = state.article ?: return
-    val id = article.id
 
     Box(modifier = Modifier.fillMaxSize()) {
         ArticleDetailContent(
