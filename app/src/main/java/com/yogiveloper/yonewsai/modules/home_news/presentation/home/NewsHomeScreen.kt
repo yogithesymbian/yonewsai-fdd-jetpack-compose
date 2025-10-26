@@ -37,6 +37,7 @@ fun NewsHomeScreen(
         articles = state.articles,
         isLoading = state.isLoading,
         error = state.error,
+        onRefresh = { vm.fetchBreakingNews() },
         onOpenDetail = onOpenDetail
     )
 }
@@ -49,7 +50,8 @@ fun NewsHomeContent(
     articles: List<Article>,
     isLoading: Boolean,
     error: String?,
-    onOpenDetail: (Article) -> Unit
+    onOpenDetail: (Article) -> Unit,
+    onRefresh: () -> Unit
 ) {
     Scaffold(
         topBar = { HomeAppBar() },
@@ -68,6 +70,7 @@ fun NewsHomeContent(
                     articles = articles,
                     isLoading = isLoading,
                     error = error,
+                    onRefresh= onRefresh,
                     onOpenDetail = onOpenDetail
                 )
             }

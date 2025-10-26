@@ -30,7 +30,7 @@ class NewsHomeViewModel @Inject constructor(
         fetchBreakingNews()
     }
 
-    private fun fetchBreakingNews(country: String = "us", category: String = "technology") {
+    fun fetchBreakingNews(country: String = "us", category: String = "technology") {
         Log.d("fetchBreakingNews", "fetchBreakingNews: called")
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)

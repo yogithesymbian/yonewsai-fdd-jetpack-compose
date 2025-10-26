@@ -45,6 +45,7 @@ import com.yogiveloper.yonewsai.core.util.time.getTimeAgo
 import com.yogiveloper.yonewsai.modules.home_news.domain.model.Article
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.molecules.ArticleImage
 import com.yogiveloper.yonewsai.modules.home_news.presentation.components.molecules.ArticleImageShape
+import com.yogiveloper.yonewsai.ui.molecules.ErrorState
 import com.yogiveloper.yonewsai.ui.organisms.AppPagerIndicator
 import com.yogiveloper.yonewsai.ui.theme.YoNewsAiTheme
 
@@ -56,7 +57,8 @@ fun BreakingNewsSection(
     articles: List<Article>,
     isLoading: Boolean,
     error: String?,
-    onOpenDetail: (Article) -> Unit
+    onOpenDetail: (Article) -> Unit,
+    onRefresh: () -> Unit
 ) {
     val pagerState = rememberPagerState(pageCount = { articles.size })
     Column(modifier = Modifier.padding(top = 16.dp)) {
@@ -84,29 +86,39 @@ fun BreakingNewsSection(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        HorizontalPager(
-            state = pagerState,
-            contentPadding = PaddingValues(horizontal = 16.dp),
-            pageSpacing = 4.dp,
-            modifier = Modifier
-                .height(180.dp)
-                .padding(end = 16.dp),
-            key = { page -> articles[page].title ?: articles[page].title ?: page }
-        ) { page ->
-            BreakingNewsCard(
-                sharedTransitionScope,
-                animatedContentScope,
-                articles[page]
-            ) { onOpenDetail(articles[page]) }
-        }
+        when {
+            isLoading -> {
+                ShimmerArticleBreakingNews()
+            }
+            error != null -> {
+                ErrorState(error, onRetry = onRefresh)
+            }
+            else -> {
+                HorizontalPager(
+                    state = pagerState,
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    pageSpacing = 4.dp,
+                    modifier = Modifier
+                        .height(180.dp)
+                        .padding(end = 16.dp),
+                    key = { page -> articles[page].title ?: articles[page].title ?: page }
+                ) { page ->
+                    BreakingNewsCard(
+                        sharedTransitionScope,
+                        animatedContentScope,
+                        articles[page]
+                    ) { onOpenDetail(articles[page]) }
+                }
 
-        Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(12.dp))
 
-        if(pagerState.pageCount > 1){
-            AppPagerIndicator(
-                pagerState= pagerState,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
+                if(pagerState.pageCount > 1){
+                    AppPagerIndicator(
+                        pagerState= pagerState,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                }
+            }
         }
     }
 }
@@ -256,6 +268,7 @@ fun BreakingNewsSectionPreview() {
                         },
                         isLoading = false,
                         error = null,
+                        onRefresh = {},
                         onOpenDetail = {}
                     )
                 }
