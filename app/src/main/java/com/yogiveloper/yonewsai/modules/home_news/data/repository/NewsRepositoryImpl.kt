@@ -17,7 +17,7 @@ class NewsRepositoryImpl @Inject constructor(
      * simple cache
      * because limitation from news api
      * there is no api to hit detail */
-    private val articleCache = mutableMapOf<String, Article>()
+    private val articleCache = mutableMapOf<Int, Article>()
 
     override suspend fun getTopHeadlines(country: String, category: String): List<Article> {
         try {
@@ -37,7 +37,7 @@ class NewsRepositoryImpl @Inject constructor(
              * add all the new articles to the cache in one go.
              * */
             articleCache.clear()
-            articleCache.putAll(domainArticles.associateBy { it.id.toString() })
+            articleCache.putAll(domainArticles.associateBy { it.id })
 
             return domainArticles
         } catch (e: Exception){
