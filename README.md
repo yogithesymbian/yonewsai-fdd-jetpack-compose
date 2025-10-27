@@ -68,7 +68,7 @@ com.yogiveloper.yonewsai
 - - [x] details
 - [x] Shared Element Transition [guide](https://developer.android.com/develop/ui/compose/animation/shared-elements)
 - - [x] with navigation compose
-- [x] News API doesn't provide a `get article` endpoint, so a simple cache is used for intent details.
+- [x] News API doesn't provide a `get article by id` endpoint, so a simple cache is used for intent details.
 
 ---
 
