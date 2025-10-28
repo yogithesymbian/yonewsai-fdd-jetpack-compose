@@ -141,7 +141,7 @@ This project demonstrates:
 
 ## 💡 Note from Developer
 
-To be honest, I mostly use AI to help with development (Ai Assistant). I completed Java and Kotlin classes on Dicoding in 2019 and last worked with Kotlin Native in 2021. Now, thanks to AI, I can easily build native apps using FDD, including unit and UI tests. It also makes code reviews easier and helps reduce mistakes. I always ask for references from official documentation, public journals, or books to support the final answers. 
+To be honest, I mostly use AI to help with development (Ai Assistant). I completed Java and Kotlin classes on Dicoding in 2019 and last worked with Kotlin Native in 2021. 2025 Now, thanks to AI, I can easily build native apps using FDD, including unit and UI tests. It also makes code reviews easier and helps reduce mistakes. I always ask for references from official documentation, public journals, or books to support the final answers. 
 
 [Practical magic with animations in Jetpack Compose](https://www.youtube.com/watch?v=HNSKJIQtb4c)
 
