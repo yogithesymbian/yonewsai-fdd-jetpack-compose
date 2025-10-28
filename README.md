@@ -69,6 +69,7 @@ com.yogiveloper.yonewsai
 - [x] Shared Element Transition [guide](https://developer.android.com/develop/ui/compose/animation/shared-elements)
 - - [x] with navigation compose
 - [x] News API doesn't provide a `get article by id` endpoint, so a simple cache is used for intent details.
+- [ ] bedah code 002
 
 ---
 
