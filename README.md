@@ -3,7 +3,7 @@
 A native Android application built with **Kotlin**, **Jetpack Compose**, and **Clean Architecture** using **Feature-Driven Development (FDD)**.  
 The app consumes data from [NewsAPI.org](https://newsapi.org) and demonstrates modern Android development practices.
 
-- Branch Bedah Coding : [Bedah-Code-001](https://github.com/yogithesymbian/yonewsai-fdd-jetpack-compose/tree/exploration/new-compose-pattern/bedah-code) `exploration/new-compose-pattern/bedah-code`
+- Branch Bedah Coding (update soon) : [Bedah-Code-001](https://github.com/yogithesymbian/yonewsai-fdd-jetpack-compose/tree/exploration/new-compose-pattern/bedah-code) `exploration/new-compose-pattern/bedah-code`
 - Build APK (Release) Signing : [Google Drive Link : YoNewsAi.apk](https://drive.google.com/file/d/1_NTBp4BMmTcVkmqtwQNs1TL4VYa8Bdr7/view?usp=sharing)
 
 ---
