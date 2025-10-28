@@ -145,6 +145,9 @@ To be honest, I mostly use AI to help with development (Ai Assistant). I complet
 
 [Practical magic with animations in Jetpack Compose](https://www.youtube.com/watch?v=HNSKJIQtb4c)
 
+![CRUD](https://github.com/user-attachments/assets/a41815d5-04ca-4c88-aaf7-31a3102b9f91)
+
+
 ---
 
 ## 📄 License
