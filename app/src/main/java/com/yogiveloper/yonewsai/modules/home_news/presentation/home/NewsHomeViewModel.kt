@@ -1,7 +1,5 @@
 package com.yogiveloper.yonewsai.modules.home_news.presentation.home
 
-import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yogiveloper.yonewsai.core.util.Resource
