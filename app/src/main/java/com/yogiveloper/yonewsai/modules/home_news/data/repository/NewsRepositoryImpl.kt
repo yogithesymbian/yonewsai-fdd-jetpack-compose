@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class NewsRepositoryImpl @Inject constructor(
-    private val api: NewsApiService
+    private val api: NewsApiService,
 ) : NewsRepository {
 
     /**
@@ -36,6 +36,7 @@ class NewsRepositoryImpl @Inject constructor(
              * articleCache.putAll(...) is then used to efficiently
              * add all the new articles to the cache in one go.
              * */
+            Log.d("NewsRepositoryImpl", "Caching ${domainArticles.size} articles")
             articleCache.clear()
             articleCache.putAll(domainArticles.associateBy { it.id })
 
