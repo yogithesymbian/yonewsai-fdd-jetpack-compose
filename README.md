@@ -48,10 +48,6 @@ com.yogiveloper.yonewsai
 ---
 
 ## 📸 Screenshots
-| News List | News Detail (1) | News Detail (2) |
-|-----------|-------------|-------------|
-| ![List Screenshot](screenshots/news_list_v2.webp) | ![Detail Screenshot](screenshots/news_detail_v2_1.webp) | ![Detail Screenshot](screenshots/news_detail_v2_2.webp) |
-
 ### 🖼️ Jetpack Compose Preview
 | News List |
 |-----------|
@@ -141,7 +137,10 @@ This project demonstrates:
 
 ## 💡 Note from Developer
 
-To be honest, I mostly use AI to help with development (Ai Assistant). I completed Java and Kotlin classes on Dicoding in 2019 and last worked with Kotlin Native in 2021. 2025 Now, thanks to AI, I can easily build native apps using FDD, including unit and UI tests. It also makes code reviews easier and helps reduce mistakes. I always ask for references from official documentation, public journals, or books to support the final answers. 
+To be honest, I mostly use AI to help with development (Ai Assistant) to make sure my code is still best practice and best approach enhance to research any other approach or not.
+see my professional certification: 
+- [Kotlin Android Developer Expert](https://drive.google.com/file/d/12uY-jkKY0PWYGZ94ueuuRyHSNcvO3WNa/view?usp=sharing)
+- [Menjadi Android Developer Expert](https://drive.google.com/file/d/1hWdaeSxN2ORqz6I7RZHc_Afs_NGtIppQ/view?usp=sharing)
 
 [Practical magic with animations in Jetpack Compose](https://www.youtube.com/watch?v=HNSKJIQtb4c)
 
