@@ -137,8 +137,8 @@ This project demonstrates:
 
 ## 💡 Note from Developer
 
-To be honest, I mostly use AI to help with development (Ai Assistant) to make sure my code is still best practice and best approach enhance to research any other approach or not.
-see my professional certification: 
+To be honest, I mostly use AI to help with development (Ai Assistant) just to make sure my code is still best practice and best approach (check other approach) in this use case. purpose for fast delivery technically testing and just for review technically/knowledge (copy&paste from old code + RnD from ai ui for Jetpack Compose Recommendation Approach)
+see my professional certification from dicoding:
 - [Kotlin Android Developer Expert](https://drive.google.com/file/d/12uY-jkKY0PWYGZ94ueuuRyHSNcvO3WNa/view?usp=sharing)
 - [Menjadi Android Developer Expert](https://drive.google.com/file/d/1hWdaeSxN2ORqz6I7RZHc_Afs_NGtIppQ/view?usp=sharing)
 
